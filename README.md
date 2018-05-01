@@ -1,6 +1,8 @@
 # AspNet.Core.SmartResult
 
- Result filter for ASP.NET Core MVC Controllers that can produce multiple types of results for the same action. Used in **multi-client** APIs that need to serve different types of results per device.
+Available as [NuGet package](https://www.nuget.org/packages/AspNet.Core.SmartResult/)
+
+Result filter for ASP.NET Core MVC Controllers that can produce multiple types of results for the same action. Used in **multi-client** APIs that need to serve different types of results per device.
 
 ![AspNet.Core.SmartResult](https://chsakell.files.wordpress.com/2018/05/smart-result.png)
 
