@@ -187,7 +187,7 @@ Pull requests are the best way to propose changes to the codebase so:
 4. Ensure the test suite passes *.
 5. Issue that pull request!
 
-&ast; *I will a TEST project as soon as posible*
+&ast; *I will add a TEST project as soon as posible*
 
 ## License
 Code released under the <a href="https://github.com/chsakell/aspnet-core-smartresult/blob/master/LICENSE" target="_blank"> MIT license</a>.
