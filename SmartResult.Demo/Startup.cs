@@ -43,7 +43,7 @@ namespace AspNet.Core.SmartResult.Demo
             List<Profile> profiles = new List<Profile> { new SmartResultProfile() };
 
             // Use the minimum configuration
-            SmartResult.ConfigureProfiles(
+            SmartResult.Configure(
                 new SmartResultConfiguration(
                     profiles,
                     isMobile: MyCustomMobileDetection,

@@ -70,7 +70,7 @@ namespace AspNet.Core.SmartResult
         #endregion
 
         #region Configuration
-        public static void ConfigureProfiles(SmartResultConfiguration configuration)
+        public static void Configure(SmartResultConfiguration configuration)
         {
             if (mapperConfiguration == null)
             {

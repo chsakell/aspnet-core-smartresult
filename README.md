@@ -48,7 +48,7 @@ The package is currently in alpha version and can be installed using one of the 
 
 ## Configuration
 
-The transformation of the result types is based on [AutoMapper](https://github.com/AutoMapper/AutoMapper) profiles and functions that determine if the `HttpRequest` comes from a mobile or a native device. The minimum requirement is to create the `AutoMapper` profiles and pass the list to a `SmartResultConfiguration` object using the `SmartResult.ConfigureProfiles` method. Place that code inside the `Startup` class before the `app.UseMvc()` call as follow:
+The transformation of the result types is based on [AutoMapper](https://github.com/AutoMapper/AutoMapper) profiles and functions that determine if the `HttpRequest` comes from a mobile or a native device. The minimum requirement is to create the `AutoMapper` profiles and pass the list to a `SmartResultConfiguration` object using the `SmartResult.Configure` method. Place that code inside the `Startup` class before the `app.UseMvc()` call as follow:
 
 #### Minimum Configuration
 
@@ -63,15 +63,31 @@ public void Configure(IApplicationBuilder app, IHostingEnvironment env)
 
     // Add a list of AutoMapper profiles to be used by SmartResult
     List<Profile> profiles = new List<Profile> { new SmartResultProfile() };
+
     // Use the minimum configuration
-    SmartResult.ConfigureProfiles(new SmartResultConfiguration(profiles));
+    SmartResult.Configure(new SmartResultConfiguration(profiles));
 
     app.UseMvc();
 }
 
 ```
 
-The above minumum configuration will use a default implementation for detecting mobile devices. It will also use the same implementation for detecting native devices.
+The above minumum configuration will use a default implementation for detecting mobile devices. It will also use the same implementation for detecting native devices. `SmartResultProfile` is an AutoMapper profile *(just for this demonstration)* and could look like this:
+
+```csharp
+
+public class SmartResultProfile : Profile
+{
+    public SmartResultProfile()
+    {
+        CreateMap<Customer, MobileCustomer>();
+        CreateMap<MobileCustomer, Customer>();
+    }
+}
+
+```
+
+Use your own AutoMapper profiles and pass them to `SmartResultConfiguration` constructor.
 
 #### Advance Configuration
 
@@ -98,7 +114,7 @@ public void Configure(IApplicationBuilder app, IHostingEnvironment env)
     List<Profile> profiles = new List<Profile> { new SmartResultProfile() };
 
     // Use the minimum configuration
-    SmartResult.ConfigureProfiles(
+    SmartResult.Configure(
         new SmartResultConfiguration(
             profiles,
             isMobile: MyCustomMobileDetection,
