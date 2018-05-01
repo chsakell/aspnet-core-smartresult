@@ -39,12 +39,31 @@ namespace AspNet.Core.SmartResult.Demo
                 app.UseDeveloperExceptionPage();
             }
 
-            List<Profile> smartProfiles = new List<Profile>();
-            smartProfiles.Add(new SmartResultProfile());
-            SmartResult.ConfigureProfiles(new 
-                SmartResultConfiguration(smartProfiles));
+            // Add a list of AutoMapper profiles to be used by SmartResult
+            List<Profile> profiles = new List<Profile> { new SmartResultProfile() };
+
+            // Use the minimum configuration
+            SmartResult.ConfigureProfiles(
+                new SmartResultConfiguration(
+                    profiles,
+                    isMobile: MyCustomMobileDetection,
+                    isNative: MyCustomNativeDetection
+                )
+            );
 
             app.UseMvc();
+        }
+
+        private bool MyCustomMobileDetection(HttpContext request)
+        {
+            // Place your custom logic here for detecting Mobile browsers
+            return true;
+        }
+
+        private bool MyCustomNativeDetection(HttpContext request)
+        {
+            // Place your custom logic here for detecting Native devices
+            return true;
         }
     }
 }

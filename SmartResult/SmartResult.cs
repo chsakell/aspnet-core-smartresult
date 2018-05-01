@@ -101,7 +101,6 @@ namespace AspNet.Core.SmartResult
                     == typeof(IList<>))
                 {
                     objectType = type.GetGenericArguments()[0];
-                    // do something...
                     break;
                 }
                 else
