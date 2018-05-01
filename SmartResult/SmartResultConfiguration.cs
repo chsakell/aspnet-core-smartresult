@@ -7,7 +7,7 @@ using System.Text;
 namespace SmartResult
 {
     /// <summary>
-    /// Configuration
+    /// Configuration for SmartResult
     /// </summary>
     public class SmartResultConfiguration
     {
