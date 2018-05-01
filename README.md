@@ -18,15 +18,16 @@ public IEnumerable<Customer> Get()
 
 The snippet above declares that the default return type *(desktop)* is of type `IEnumerable<Customer>` and the return type for mobile browsers is `IEnumerable<MobileCustomer>`
 
-The Filter also support different result types for native apps.
+The Filter also supports different result types for native apps.
 
  ```csharp
 
-[HttpGet]
-[SmartResult(Default = typeof(IEnumerable<Customer>), Mobile = typeof(IEnumerable<MobileCustomer>))]
-public IActionResult Get()
+// GET api/customers/id
+[HttpGet("{id}")]
+[SmartResult(Default = typeof(Customer), Mobile = typeof(MobileCustomer), Native = typeof(NativeCustomer))]
+public MobileCustomer Get(int id)
 {
-    return Ok(repository.GetCustomers());
+    return repository.GetCustomer(id);
 }
 
 ```
