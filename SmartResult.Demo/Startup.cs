@@ -11,6 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using AspNet.Core.SmartResult.Demo.Mappings;
+using SmartResult.Demo;
 
 namespace AspNet.Core.SmartResult.Demo
 {
@@ -26,6 +27,7 @@ namespace AspNet.Core.SmartResult.Demo
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddSingleton<IRepository, Repository>();
             services.AddMvc();
         }
 
