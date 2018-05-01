@@ -17,12 +17,13 @@ namespace AspNet.Core.SmartResult.Demo.Controllers
         {
             this.repository = repository;
         }
+
         // GET api/customers
         [HttpGet]
         [SmartResult(Default = typeof(IEnumerable<Customer>), Mobile = typeof(IEnumerable<MobileCustomer>))]
-        public IEnumerable<Customer> Get()
+        public IActionResult Get()
         {
-            return repository.GetCustomers();
+            return Ok(repository.GetCustomers());
         }
 
         // GET api/customers/id

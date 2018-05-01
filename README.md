@@ -22,11 +22,11 @@ The Filter also support different result types for native apps.
 
  ```csharp
 
-[HttpGet("{id}")]
-[SmartResult(Default = typeof(Customer), Mobile = typeof(MobileCustomer), Native = typeof(NativeCustomer))]
-public MobileCustomer Get(int id)
+[HttpGet]
+[SmartResult(Default = typeof(IEnumerable<Customer>), Mobile = typeof(IEnumerable<MobileCustomer>))]
+public IActionResult Get()
 {
-    return repository.GetCustomer(id);
+    return Ok(repository.GetCustomers());
 }
 
 ```
