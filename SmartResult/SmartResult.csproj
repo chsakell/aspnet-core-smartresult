@@ -2,6 +2,16 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <PackageId>AspNet.Core.SmartResult</PackageId>
+    <Product>AspNet.Core.SmartResult</Product>
+    <Company>chsakell's Blog</Company>
+    <Authors>Christos Sakellarios</Authors>
+    <PackageProjectUrl>https://github.com/chsakell/aspnet-core-smartresult</PackageProjectUrl>
+    <Description>Result filter for ASP.NET Core MVC Controllers that can produce multiple types of results for the same action. Used in multi-client APIs that need to serve different types of results per device</Description>
+    <RepositoryUrl>https://github.com/chsakell/aspnet-core-smartresult</RepositoryUrl>
+    <PackageTags>smart result cross platform chsakell aspnet core web</PackageTags>
+    <PackageReleaseNotes>Result filter for ASP.NET Core MVC Controllers that can produce multiple types of results for the same action</PackageReleaseNotes>
+    <Version>1.0.0-alpha1</Version>
   </PropertyGroup>
 
   <ItemGroup>
