@@ -41,7 +41,7 @@ The snippet below declares that the default return type *(desktop)* is of type `
  // GET api/customers
 [HttpGet]
 [SmartResult(Default = typeof(IEnumerable<Customer>), Mobile = typeof(IEnumerable<MobileCustomer>))]
-public IEnumerable<Customer> Get()
+public IActionResult Get()
 {
     return repository.GetCustomers();
 }
