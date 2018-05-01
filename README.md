@@ -12,7 +12,7 @@
 
 ### Examples of usage
 
-In the following examples the `NativeCustomer` class is the base and more light weighted class that suppoted to be consumed by native apps. `MobileCustomer` inherits it and adds a single property. `Customer` contains all available information for a single customer.
+In the following examples the `NativeCustomer` class is the base and more light weighted class that supposed to be consumed by native apps. `MobileCustomer` inherits it and adds a single property. `Customer` contains all available information for a single customer.
 
 ```csharp
 public class Customer : MobileCustomer
