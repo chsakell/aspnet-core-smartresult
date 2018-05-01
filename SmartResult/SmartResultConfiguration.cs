@@ -4,16 +4,22 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace SmartResult
+namespace AspNet.Core.SmartResult
 {
+    #region Detection
+
+    public delegate bool IsMobile(HttpContext context);
+    public delegate bool IsNative(HttpContext context);
+
+    #endregion
+
     /// <summary>
     /// Configuration for SmartResult
     /// </summary>
     public class SmartResultConfiguration
     {
         private readonly List<Profile> profiles;
-        public delegate bool IsMobile(HttpContext context);
-        public delegate bool IsNative(HttpContext context);
+        
         IsMobile isMobile;
         IsNative isNative;
 

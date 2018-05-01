@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
-namespace SmartResult.Demo.Controllers
+namespace AspNet.Core.SmartResult.Demo.Controllers
 {
     [Route("api/[controller]")]
     public class ValuesController : Controller

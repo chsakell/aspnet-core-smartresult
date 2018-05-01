@@ -4,9 +4,8 @@ using Microsoft.AspNetCore.Mvc.Filters;
 using System;
 using System.Collections.Generic;
 using System.Text;
-using static SmartResult.SmartResultConfiguration;
 
-namespace SmartResult
+namespace AspNet.Core.SmartResult
 {
     public class SmartResult : Attribute, IResultFilter
     {

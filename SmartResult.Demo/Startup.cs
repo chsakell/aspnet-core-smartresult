@@ -10,9 +10,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using SmartResult.Demo.Mappings;
+using AspNet.Core.SmartResult.Demo.Mappings;
 
-namespace SmartResult.Demo
+namespace AspNet.Core.SmartResult.Demo
 {
     public class Startup
     {
