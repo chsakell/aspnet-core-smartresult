@@ -59,10 +59,16 @@ namespace AspNet.Core.SmartResult
                 if (Mobile != null && isMobileBrowser && resultType != mobileType)
                 {
                     objectResult.Value = mapper.Map(objectResult.Value, Default, Mobile);
+                    context.HttpContext.Response.Headers.Add("Result-Type", "Mobile");
                 }
                 else if (Native != null && isNativeDevice && resultType != nativeType)
                 {
                     objectResult.Value = mapper.Map(objectResult.Value, Default, Native);
+                    context.HttpContext.Response.Headers.Add("Result-Type", "Native");
+                }
+                else
+                {
+                    context.HttpContext.Response.Headers.Add("Result-Type", "Default");
                 }
             }
         }
