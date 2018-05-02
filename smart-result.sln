@@ -3,13 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27428.2043
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartResult", "SmartResult\SmartResult.csproj", "{D9367210-1DB9-402B-A62E-5D3DBD818639}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SmartResult", "SmartResult\SmartResult.csproj", "{D9367210-1DB9-402B-A62E-5D3DBD818639}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "package", "package", "{E160B723-702E-44B9-BACF-39D46A5D2404}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "demo", "demo", "{4D24DACD-45B5-4985-812D-5B229B640B50}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartResult.Demo", "SmartResult.Demo\SmartResult.Demo.csproj", "{DD081A91-EA47-455B-AEE5-2E4B2135E417}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SmartResult.Demo", "SmartResult.Demo\SmartResult.Demo.csproj", "{DD081A91-EA47-455B-AEE5-2E4B2135E417}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{D0C4BDCE-EC64-405C-BC34-E9353F466025}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartResult.Integration.Tests", "SmartResult.Integration.Tests\SmartResult.Integration.Tests.csproj", "{D5620F24-6AA3-4C09-8EE8-C6D72FA09A41}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -25,6 +29,10 @@ Global
 		{DD081A91-EA47-455B-AEE5-2E4B2135E417}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DD081A91-EA47-455B-AEE5-2E4B2135E417}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DD081A91-EA47-455B-AEE5-2E4B2135E417}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D5620F24-6AA3-4C09-8EE8-C6D72FA09A41}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D5620F24-6AA3-4C09-8EE8-C6D72FA09A41}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D5620F24-6AA3-4C09-8EE8-C6D72FA09A41}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D5620F24-6AA3-4C09-8EE8-C6D72FA09A41}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -32,6 +40,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{D9367210-1DB9-402B-A62E-5D3DBD818639} = {E160B723-702E-44B9-BACF-39D46A5D2404}
 		{DD081A91-EA47-455B-AEE5-2E4B2135E417} = {4D24DACD-45B5-4985-812D-5B229B640B50}
+		{D5620F24-6AA3-4C09-8EE8-C6D72FA09A41} = {D0C4BDCE-EC64-405C-BC34-E9353F466025}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {357FB8C6-7D56-4307-8431-F04C3549787C}
