@@ -11,7 +11,7 @@
     <RepositoryUrl>https://github.com/chsakell/aspnet-core-smartresult</RepositoryUrl>
     <PackageTags>smart result cross platform chsakell aspnet core web</PackageTags>
     <PackageReleaseNotes>Result filter for ASP.NET Core MVC Controllers that can produce multiple types of results for the same action</PackageReleaseNotes>
-    <Version>1.0.0-alpha2</Version>
+    <Version>1.0.0-beta1</Version>
   </PropertyGroup>
 
   <ItemGroup>
