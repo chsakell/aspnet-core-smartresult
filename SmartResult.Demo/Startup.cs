@@ -45,9 +45,7 @@ namespace AspNet.Core.SmartResult.Demo
             // Use the minimum configuration
             SmartResult.Configure(
                 new SmartResultConfiguration(
-                    profiles,
-                    isMobile: MyCustomMobileDetection,
-                    isNative: MyCustomNativeDetection
+                    profiles
                 )
             );
 

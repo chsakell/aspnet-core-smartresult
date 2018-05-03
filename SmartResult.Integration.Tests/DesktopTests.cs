@@ -13,12 +13,12 @@ using Xunit;
 
 namespace SmartResult.Integration.Tests
 {
-    public class MobileTests
+    public class DesktopTests
     {
         private readonly TestServer _server;
         private readonly HttpClient _client;
 
-        public MobileTests()
+        public DesktopTests()
         {
             // Arrange
             _server = new TestServer(new WebHostBuilder()
@@ -27,20 +27,19 @@ namespace SmartResult.Integration.Tests
         }
 
         [Fact]
-        public async Task Returns_Mobile_Result_When_Android_In_User_Agent()
+        public async Task Returns_Default_Result_Whithout_User_Agent()
         {
             // Act
-            _client.DefaultRequestHeaders.Add("User-Agent", Constants.AndroidMobileBrowser);
             var response = await _client.GetAsync("/api/customers/");
             response.EnsureSuccessStatusCode();
 
             var responseString = await response.Content.ReadAsStringAsync();
             var headerResult = response.Headers.GetValues("Result-Type").ToList().First();
-            var responseResult = JsonConvert.DeserializeObject<List<MobileCustomer>>(responseString);
+            var responseResult = JsonConvert.DeserializeObject<List<Customer>>(responseString);
             
             // Assert
-            Assert.Equal("Mobile", headerResult);
-            Assert.IsType<List<MobileCustomer>>(responseResult);
+            Assert.Equal("Default", headerResult);
+            Assert.IsType<List<Customer>>(responseResult);
         }
     }
 }

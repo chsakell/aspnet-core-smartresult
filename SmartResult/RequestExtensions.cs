@@ -15,7 +15,7 @@ namespace AspNet.Core.SmartResult
         public static bool IsMobileBrowser(this HttpRequest request)
         {
             var userAgent = request.UserAgent();
-            if ((b.IsMatch(userAgent) || v.IsMatch(userAgent.Substring(0, 4))))
+            if (userAgent != null && (b.IsMatch(userAgent) || v.IsMatch(userAgent.Substring(0, 4))))
             {
                 return true;
             }
