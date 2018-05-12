@@ -72,11 +72,11 @@ The snippet above declares that the result type changes per device as follow:
 
 ### Installation
 
-The package is currently in beta version and can be installed using one of the following ways:
+The package can be installed using one of the following ways:
 
-* **Package Manager**:  `Install-Package AspNet.Core.SmartResult -Version 1.0.0-beta1`
-* **.NET CLI**: `dotnet add package AspNet.Core.SmartResult --version 1.0.0-beta1`
-* **Paket CLI**: `paket add AspNet.Core.SmartResult --version 1.0.0-beta1`
+* **Package Manager**:  `Install-Package AspNet.Core.SmartResult`
+* **.NET CLI**: `dotnet add package AspNet.Core.SmartResult`
+* **Paket CLI**: `paket add AspNet.Core.SmartResult`
 
 ### Configuration
 
