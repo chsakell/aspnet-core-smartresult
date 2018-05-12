@@ -52,12 +52,22 @@ namespace AspNet.Core.SmartResult.Demo
             app.UseMvc();
         }
 
+        /// <summary>
+        /// Implement your own custom logic for detecting Mobile Browsers
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
         private bool MyCustomMobileDetection(HttpContext request)
         {
             // Place your custom logic here for detecting Mobile browsers
             return true;
         }
 
+        /// <summary>
+        /// Implement your own custom logic for detecting Native Devices
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
         private bool MyCustomNativeDetection(HttpContext request)
         {
             // Place your custom logic here for detecting Native devices
