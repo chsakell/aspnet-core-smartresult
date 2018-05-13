@@ -113,7 +113,7 @@ public class SmartResultProfile : Profile
     public SmartResultProfile()
     {
         CreateMap<Customer, MobileCustomer>();
-        CreateMap<MobileCustomer, Customer>();
+        CreateMap<Customer, NativeCustomer>();
     }
 }
 

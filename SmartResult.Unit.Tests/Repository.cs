@@ -1,10 +1,10 @@
-﻿using SmartResult.Demo.Models;
+﻿using SmartResult.Unit.Tests.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace SmartResult.Demo
+namespace SmartResult.Unit.Tests
 {
     public class Repository : IRepository
     {
