@@ -20,4 +20,4 @@ build_script:
   - cmd: dotnet publish -c Release
 
 test_script: 
- cmd: dotnet test "[%APPVEYOR_BUILD_FOLDER%\src\SmartResult.Integration.Tests]" -c %CONFIGURATION%
+ cmd: dotnet test "[%APPVEYOR_BUILD_FOLDER%\SmartResult.Integration.Tests]" -c %CONFIGURATION%
