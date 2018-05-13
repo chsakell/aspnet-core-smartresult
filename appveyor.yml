@@ -21,7 +21,7 @@ build_script:
 
 # scripts to run before tests
 before_test:
-  - cd SmartResult.Unit.Tests
+  - cd ../SmartResult.Unit.Tests
   - cmd: dotnet restore --verbosity m
 
 # scripts to run after tests
