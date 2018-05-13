@@ -1,6 +1,6 @@
 # AspNet.Core.SmartResult
 
-[![Build status](https://ci.appveyor.com/api/projects/status/i63utoec8j7wsjwy/branch/master?svg=true)](https://ci.appveyor.com/project/chsakell/aspnet-core-smartresult/branch/master)
+[![Build status](https://ci.appveyor.com/api/projects/status/i63utoec8j7wsjwy/branch/master?svg=true)](https://ci.appveyor.com/project/chsakell/aspnet-core-smartresult/branch/master) [![AppVeyor tests](https://img.shields.io/appveyor/tests/chsakell/aspnet-core-smartresult.svg)](https://ci.appveyor.com/project/chsakell/aspnet-core-smartresult)
 
 Available as [NuGet package](https://www.nuget.org/packages/AspNet.Core.SmartResult/)
 
