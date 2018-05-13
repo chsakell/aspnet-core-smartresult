@@ -19,5 +19,15 @@ before_build:
 build_script:
   - cmd: dotnet publish -c Release
 
-test_script: 
- cmd: dotnet test "[%APPVEYOR_BUILD_FOLDER%\SmartResult.Integration.Tests]" -c %CONFIGURATION%
+# scripts to run before tests
+before_test:
+  - cd SmartResult.Unit.Tests
+  - cmd: dotnet restore --verbosity m
+
+# scripts to run after tests
+after_test:
+
+# to run your custom scripts instead of automatic tests
+test_script:
+  - echo This is my custom test script
+  - cmd: dotnet test
