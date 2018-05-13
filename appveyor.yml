@@ -23,11 +23,15 @@ build_script:
 before_test:
   - cd ../SmartResult.Unit.Tests
   - cmd: dotnet restore --verbosity m
+  - cd ../SmartResult.Integration.Tests
+  - cmd: dotnet restore --verbosity m
 
 # scripts to run after tests
 after_test:
 
 # to run your custom scripts instead of automatic tests
 test_script:
-  - echo This is my custom test script
+  - cd ../SmartResult.Unit.Tests
+  - cmd: dotnet test
+  - cd ../SmartResult.Integration.Tests
   - cmd: dotnet test
