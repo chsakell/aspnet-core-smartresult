@@ -18,3 +18,7 @@ before_build:
   - cmd: dotnet restore --verbosity m
 build_script:
   - cmd: dotnet publish -c Release
+
+test:
+  assemblies:
+    - '**\*.Tests.dll'
