@@ -19,6 +19,5 @@ before_build:
 build_script:
   - cmd: dotnet publish -c Release
 
-test:
-  assemblies:
-    - '**\*.Tests.dll'
+test_script: 
+ cmd: dotnet test "[%APPVEYOR_BUILD_FOLDER%\src\SmartResult.Integration.Tests]" -c %CONFIGURATION%
