@@ -44,7 +44,10 @@ namespace AspNet.Core.SmartResult
         public void OnResultExecuting(ResultExecutingContext context)
         {
             if (!CanProssess())
+            {
+                context.HttpContext.Response.Headers.Add("Result-Type", "Default");
                 return;
+            }
 
             var objectResult = context.Result as ObjectResult;
             var isMobileBrowser = isMobile(context.HttpContext);

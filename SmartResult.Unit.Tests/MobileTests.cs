@@ -52,7 +52,6 @@ namespace SmartResult.Unit.Tests
             httpContext.SetupGet(c => c.Request).Returns(request.Object);
             httpContext.SetupGet(c => c.Response).Returns(response.Object);
 
-            //var resultExecutedContext = new Mock<ResultExecutedContext>();
             var modelState = new ModelStateDictionary();
 
             var actionContext = new ActionContext(
@@ -74,6 +73,49 @@ namespace SmartResult.Unit.Tests
             // Assert
             Assert.IsAssignableFrom<IEnumerable<MobileCustomer>>((result as ObjectResult).Value);
             Assert.Equal("Mobile", resultHeaderType);
+        }
+
+        [Fact]
+        public void Should_Return_Default_Result_When_Mobile_Not_Defined()
+        {
+            var filter = new AspNet.Core.SmartResult.SmartResult
+            {
+                Default = typeof(IEnumerable<Customer>)
+            };
+
+            // Mock out the context to run the action filter.
+            var request = new Mock<HttpRequest>();
+            var requestHeaders = new HeaderDictionary();
+            requestHeaders.Add("User-Agent", Constants.AndroidMobileBrowser);
+            request.SetupGet<IHeaderDictionary>(r => r.Headers).Returns(requestHeaders);
+            var response = new Mock<HttpResponse>();
+            response.SetupGet<IHeaderDictionary>(r => r.Headers).Returns(new HeaderDictionary());
+
+            var httpContext = new Mock<HttpContext>();
+            httpContext.SetupGet(c => c.Request).Returns(request.Object);
+            httpContext.SetupGet(c => c.Response).Returns(response.Object);
+
+            var modelState = new ModelStateDictionary();
+
+            var actionContext = new ActionContext(
+                httpContext.Object,
+                new Mock<RouteData>().Object,
+                new Mock<ActionDescriptor>().Object,
+                modelState
+            );
+
+            var resultExecutedContext = new ResultExecutingContext(actionContext,
+            new List<IFilterMetadata>(),
+            new OkObjectResult(_repository.GetCustomers()),
+            new Mock<Controller>().Object);
+
+            filter.OnResultExecuting(resultExecutedContext);
+            var resultHeaderType = resultExecutedContext.HttpContext.Response.Headers["Result-Type"].ToString();
+            var result = resultExecutedContext.Result;
+
+            // Assert
+            Assert.IsAssignableFrom<IEnumerable<Customer>>((result as ObjectResult).Value);
+            Assert.Equal("Default", resultHeaderType);
         }
     }
 }
