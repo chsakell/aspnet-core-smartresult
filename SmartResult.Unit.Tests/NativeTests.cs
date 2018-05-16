@@ -118,7 +118,7 @@ namespace SmartResult.Unit.Tests
 
             // Assert
             Assert.IsAssignableFrom<IEnumerable<Customer>>((result as ObjectResult).Value);
-            Assert.Equal("Default", resultHeaderType);
+            Assert.Equal(expected: "Default", actual: resultHeaderType);
         }
 
         private bool IsNativeDevice(HttpContext request)
