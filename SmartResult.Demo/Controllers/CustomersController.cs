@@ -20,7 +20,8 @@ namespace AspNet.Core.SmartResult.Demo.Controllers
 
         // GET api/customers
         [HttpGet]
-        [SmartResult(Default = typeof(IEnumerable<Customer>), Mobile = typeof(IEnumerable<MobileCustomer>))]
+        [SmartResult(Default = typeof(IEnumerable<Customer>), Mobile = typeof(IEnumerable<MobileCustomer>), 
+        Native = typeof(IEnumerable<NativeCustomer>))]
         public IActionResult Get()
         {
             return Ok(repository.GetCustomers());
