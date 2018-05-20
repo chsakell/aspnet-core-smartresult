@@ -50,8 +50,8 @@ namespace AspNet.Core.SmartResult
             }
 
             var objectResult = context.Result as ObjectResult;
-            var isMobileBrowser = isMobile(context.HttpContext);
-            var isNativeDevice = isNative(context.HttpContext);
+            var isMobileBrowser = isMobile != null && isMobile(context.HttpContext);
+            var isNativeDevice = isNative != null && isNative(context.HttpContext);
 
             if (objectResult != null)
             {
@@ -123,7 +123,7 @@ namespace AspNet.Core.SmartResult
 
         private bool CanProssess()
         {
-            return Default != null && (Mobile != null || Native != null);
+            return Default != null && (Mobile != null || Native != null) && mapper != null;
         }
         public void OnResultExecuted(ResultExecutedContext context)
         {
