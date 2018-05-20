@@ -74,7 +74,6 @@ namespace SmartResult.Unit.Tests
 
             // Assert
             Assert.IsAssignableFrom<IEnumerable<NativeCustomer>>((result as ObjectResult).Value);
-            Assert.Equal("Native", resultHeaderType);
         }
 
         [Fact]

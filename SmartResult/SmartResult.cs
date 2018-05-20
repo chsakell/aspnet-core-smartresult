@@ -81,17 +81,14 @@ namespace AspNet.Core.SmartResult
         #region Configuration
         public static void Configure(SmartResultConfiguration configuration)
         {
-            if (mapperConfiguration == null)
+            mapperConfiguration = new MapperConfiguration(cfg =>
             {
-                mapperConfiguration = new MapperConfiguration(cfg =>
+                configuration.Profiles.ForEach(p =>
                 {
-                    configuration.Profiles.ForEach(p =>
-                    {
-                        cfg.AddProfile(p);
-                    });
+                    cfg.AddProfile(p);
                 });
-                mapper = mapperConfiguration.CreateMapper();
-            }
+            });
+            mapper = mapperConfiguration.CreateMapper();
 
             isMobile = configuration.IsMobileBrowser();
             isNative = configuration.IsNativeDevice();
