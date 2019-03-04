@@ -43,7 +43,7 @@ namespace AspNet.Core.SmartResult
 
         public void OnResultExecuting(ResultExecutingContext context)
         {
-            if (!CanProssess())
+            if (!CanProcess())
             {
                 context.HttpContext.Response.Headers.Add("Result-Type", "Default");
                 return;
@@ -118,7 +118,7 @@ namespace AspNet.Core.SmartResult
             return objectType;
         }
 
-        private bool CanProssess()
+        private bool CanProcess()
         {
             return Default != null && (Mobile != null || Native != null) && mapper != null;
         }
