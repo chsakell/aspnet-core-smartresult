@@ -124,7 +124,6 @@ namespace SmartResult.Unit.Tests
             var result = resultExecutedContext.Result;
 
             // Assert
-            Assert.IsAssignableFrom<IEnumerable<Customer>>((result as ObjectResult).Value);
             Assert.Equal("Default", resultHeaderType);
         }
     }
