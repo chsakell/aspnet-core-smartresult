@@ -1,5 +1,4 @@
 using AspNet.Core.SmartResult;
-using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Abstractions;
@@ -9,7 +8,6 @@ using Microsoft.AspNetCore.Routing;
 using Moq;
 using SmartResult.Unit.Tests.Mappings;
 using SmartResult.Unit.Tests.Models;
-using System;
 using System.Collections.Generic;
 using Xunit;
 
@@ -21,26 +19,27 @@ namespace SmartResult.Unit.Tests
         public NativeTests()
         {
             _repository = new Repository();
-
-            List<Profile> profiles = new List<Profile> { new SmartResultProfile() };
-
-            AspNet.Core.SmartResult.SmartResult.Configure(
-                new AspNet.Core.SmartResult.SmartResultConfiguration(
-                    profiles,
-                    isNative: IsNativeDevice
-                )
-            );
         }
 
         [Fact]
         public void Should_Return_Native_Result()
         {
-            var filter = new AspNet.Core.SmartResult.SmartResult
+            List<SmartResultProfile> profiles = new List<SmartResultProfile>
             {
-                Default = typeof(IEnumerable<Customer>),
-                Mobile = typeof(IEnumerable<MobileCustomer>),
-                Native = typeof(IEnumerable<NativeCustomer>)
+                new SmartResultProfile(new CustomerTestProfile(),
+                    typeof(Customer),
+                    typeof(MobileCustomer),
+                    typeof(NativeCustomer))
             };
+
+            AspNet.Core.SmartResult.SmartResult.Configure(
+                new SmartResultConfiguration(
+                    profiles,
+                    isNative: IsNativeDevice
+                )
+            );
+
+            var filter = new AspNet.Core.SmartResult.SmartResult();
 
             // Mock out the context to run the action filter.
             var request = new Mock<HttpRequest>();
@@ -79,11 +78,21 @@ namespace SmartResult.Unit.Tests
         [Fact]
         public void Should_Return_Default_Result_When_Native_Type_Not_Defined()
         {
-            var filter = new AspNet.Core.SmartResult.SmartResult
+            List<SmartResultProfile> profiles = new List<SmartResultProfile>
             {
-                Default = typeof(IEnumerable<Customer>),
-                Mobile = typeof(IEnumerable<MobileCustomer>)
+                new SmartResultProfile(new CustomerTestProfile(),
+                    typeof(Customer),
+                    typeof(MobileCustomer))
             };
+
+            AspNet.Core.SmartResult.SmartResult.Configure(
+                new SmartResultConfiguration(
+                    profiles,
+                    isNative: IsNativeDevice
+                )
+            );
+
+            var filter = new AspNet.Core.SmartResult.SmartResult();
 
             // Mock out the context to run the action filter.
             var request = new Mock<HttpRequest>();

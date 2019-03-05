@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using SmartResult;
 
 namespace AspNet.Core.SmartResult
 {
@@ -18,25 +19,16 @@ namespace AspNet.Core.SmartResult
     /// </summary>
     public class SmartResultConfiguration
     {
-        private readonly List<Profile> profiles;
-        
-        IsMobile isMobile;
-        IsNative isNative;
+        readonly IsMobile isMobile;
+        readonly IsNative isNative;
 
-        public List<Profile> Profiles
-        {
-            get
-            {
-                return this.profiles;
-            }
-            private set { }
-        }
+        public List<SmartResultProfile> Profiles { get; }
 
-        public SmartResultConfiguration(List<Profile> profiles, IsMobile isMobile = null, IsNative isNative = null)
+        public SmartResultConfiguration(List<SmartResultProfile> profiles, IsMobile isMobile = null, IsNative isNative = null)
         {
-            this.profiles = profiles;
-            this.isMobile = isMobile != null ? isMobile : IsMobileBrowser;
-            this.isNative = isNative != null ? isNative : IsMobileBrowser;
+            this.Profiles = profiles;
+            this.isMobile = isMobile ?? IsMobileBrowser;
+            this.isNative = isNative;
         }
 
         private bool IsMobileBrowser(HttpContext context)

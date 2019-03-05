@@ -11,7 +11,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using AspNet.Core.SmartResult.Demo.Mappings;
+using SmartResult;
 using SmartResult.Demo;
+using SmartResult.Demo.Models;
 
 namespace AspNet.Core.SmartResult.Demo
 {
@@ -40,7 +42,13 @@ namespace AspNet.Core.SmartResult.Demo
             }
 
             // Add a list of AutoMapper profiles to be used by SmartResult
-            List<Profile> profiles = new List<Profile> { new SmartResultProfile() };
+            List<SmartResultProfile> profiles = new List<SmartResultProfile>
+            {
+                new SmartResultProfile(new CustomerProfile(), 
+                    typeof(Customer), 
+                    typeof(MobileCustomer), 
+                    typeof(NativeCustomer))
+            };
 
             // Use the minimum configuration
             SmartResult.Configure(

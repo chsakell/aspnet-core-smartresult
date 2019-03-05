@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using AspNet.Core.SmartResult.Demo.Controllers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,9 +7,9 @@ using SmartResult.Demo.Models;
 
 namespace AspNet.Core.SmartResult.Demo.Mappings
 {
-    public class SmartResultProfile : Profile
+    public class CustomerProfile : Profile
     {
-        public SmartResultProfile()
+        public CustomerProfile()
         {
             CreateMap<Customer, MobileCustomer>();
             CreateMap<Customer, NativeCustomer>();

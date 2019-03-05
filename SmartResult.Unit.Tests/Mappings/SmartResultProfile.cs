@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace SmartResult.Unit.Tests.Mappings
 {
-    public class SmartResultProfile : Profile
+    public class CustomerTestProfile : Profile
     {
-        public SmartResultProfile()
+        public CustomerTestProfile()
         {
             CreateMap<Customer, MobileCustomer>();
             CreateMap<Customer, NativeCustomer>();

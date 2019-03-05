@@ -11,34 +11,33 @@ namespace AspNet.Core.SmartResult.Demo.Controllers
     [Route("api/[controller]")]
     public class CustomersController : Controller
     {
-        private readonly IRepository repository;
+        private readonly IRepository _repository;
 
         public CustomersController(IRepository repository)
         {
-            this.repository = repository;
+            _repository = repository;
         }
 
         // GET api/customers
         [HttpGet]
-        [SmartResult(Default = typeof(IEnumerable<Customer>), Mobile = typeof(IEnumerable<MobileCustomer>), 
-        Native = typeof(IEnumerable<NativeCustomer>))]
+        [SmartResult]
         public IActionResult Get()
         {
-            return Ok(repository.GetCustomers());
+            return Ok(_repository.GetCustomers());
         }
 
         // GET api/customers/id
         [HttpGet("{id}")]
-        [SmartResult(Default = typeof(Customer), Mobile = typeof(MobileCustomer), Native = typeof(NativeCustomer))]
-        public MobileCustomer Get(int id)
+        [SmartResult]
+        public Customer Get(int id)
         {
-            return repository.GetCustomer(id);
+            return _repository.GetCustomer(id);
         }
 
 
         // POST api/values
         [HttpPost]
-        [SmartResult(Default = typeof(Customer), Mobile = typeof(MobileCustomer))]
+        [SmartResult]
         public IActionResult Post([FromBody]Customer value)
         {
             return Ok(value);
