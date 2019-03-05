@@ -38,7 +38,7 @@ public class NativeCustomer
 
 ```
 
-The snippet below declares that the default return type *(desktop)* is of type `IEnumerable<Customer>` and the return type for mobile browsers is `IEnumerable<MobileCustomer>`
+The snippet below will return type of `IEnumerable<Customer>` for *(desktop)* and type of `IEnumerable<MobileCustomer>` for mobile browsers based on configuration.
 
 ```csharp
 
@@ -66,7 +66,26 @@ public Customer Get(int id)
 
 ```
 
-The snippet above declares that the result type changes per device as follow:
+The configuration is an `AutoMapper` profile along with the mappings per type and device. For example:
+
+ ```csharp
+
+List<SmartResultProfile> profiles = new List<SmartResultProfile>
+{
+    new SmartResultProfile(new CustomerProfile(), 
+        typeof(Customer), 
+        typeof(MobileCustomer), 
+        typeof(NativeCustomer))
+};
+
+// Use the minimum configuration
+SmartResult.Configure(
+    new SmartResultConfiguration(
+        profiles
+    )
+);
+
+```
 
 1. `Customer` for desktop browsers
 2. `MobileCustomer` for mobile browsers
