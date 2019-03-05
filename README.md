@@ -44,7 +44,7 @@ The snippet below declares that the default return type *(desktop)* is of type `
 
  // GET api/customers
 [HttpGet]
-[SmartResult(Default = typeof(IEnumerable<Customer>), Mobile = typeof(IEnumerable<MobileCustomer>))]
+[SmartResult]
 public IActionResult Get()
 {
     return repository.GetCustomers();
@@ -52,14 +52,14 @@ public IActionResult Get()
 
  ```
 
-You can also define different result type for native apps.
+Works with ActionResults and base types as well
 
  ```csharp
 
 // GET api/customers/id
 [HttpGet("{id}")]
-[SmartResult(Default = typeof(Customer), Mobile = typeof(MobileCustomer), Native = typeof(NativeCustomer))]
-public MobileCustomer Get(int id)
+[SmartResult]
+public Customer Get(int id)
 {
     return repository.GetCustomer(id);
 }
@@ -96,21 +96,30 @@ public void Configure(IApplicationBuilder app, IHostingEnvironment env)
     }
 
     // Add a list of AutoMapper profiles to be used by SmartResult
-    List<Profile> profiles = new List<Profile> { new SmartResultProfile() };
+    List<SmartResultProfile> profiles = new List<SmartResultProfile>
+    {
+        new SmartResultProfile(new CustomerProfile(), 
+            typeof(Customer), 
+            typeof(MobileCustomer), 
+            typeof(NativeCustomer))
+    };
 
     // Use the minimum configuration
-    SmartResult.Configure(new SmartResultConfiguration(profiles));
+    SmartResult.Configure(
+        new SmartResultConfiguration(
+            profiles
+        ));
 
     app.UseMvc();
 }
 
 ```
 
-The above minumum configuration will use a default implementation for detecting mobile devices. It will also use the same implementation for detecting native devices. `SmartResultProfile` is an AutoMapper profile *(just for this demonstration)* and could look like this:
+The above minumum configuration will use a default implementation for detecting mobile devices. `CustomerProfile` is an AutoMapper profile *(just for this demonstration)* and could look like this:
 
 ```csharp
 
-public class SmartResultProfile : Profile
+public class CustomerProfile : Profile
 {
     public SmartResultProfile()
     {
@@ -144,8 +153,13 @@ public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         app.UseDeveloperExceptionPage();
     }
 
-    // Add a list of AutoMapper profiles to be used by SmartResult
-    List<Profile> profiles = new List<Profile> { new SmartResultProfile() };
+    List<SmartResultProfile> profiles = new List<SmartResultProfile>
+    {
+        new SmartResultProfile(new CustomerProfile(), 
+            typeof(Customer), 
+            typeof(MobileCustomer), 
+            typeof(NativeCustomer))
+    };
 
     // Use the minimum configuration
     SmartResult.Configure(
@@ -153,9 +167,8 @@ public void Configure(IApplicationBuilder app, IHostingEnvironment env)
             profiles,
             isMobile: MyCustomMobileDetection,
             isNative: MyCustomNativeDetection
-        )
-    );
-
+        ));
+        
     app.UseMvc();
 }
 
