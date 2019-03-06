@@ -22,9 +22,9 @@ namespace AspNet.Core.SmartResult
         readonly IsMobile isMobile;
         readonly IsNative isNative;
 
-        public List<SmartResultProfile> Profiles { get; }
+        public List<ISmartResultProfile> Profiles { get; }
 
-        public SmartResultConfiguration(List<SmartResultProfile> profiles, IsMobile isMobile = null, IsNative isNative = null)
+        public SmartResultConfiguration(List<ISmartResultProfile> profiles, IsMobile isMobile = null, IsNative isNative = null)
         {
             this.Profiles = profiles;
             this.isMobile = isMobile ?? IsMobileBrowser;

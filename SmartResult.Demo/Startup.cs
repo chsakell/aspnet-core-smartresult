@@ -42,12 +42,9 @@ namespace AspNet.Core.SmartResult.Demo
             }
 
             // Add a list of AutoMapper profiles to be used by SmartResult
-            List<SmartResultProfile> profiles = new List<SmartResultProfile>
+            List<ISmartResultProfile> profiles = new List<ISmartResultProfile>
             {
-                new SmartResultProfile(new CustomerProfile(), 
-                    desktop: typeof(Customer), 
-                    mobile: typeof(MobileCustomer), 
-                    native: typeof(NativeCustomer))
+                new SmartResultProfile<Customer, MobileCustomer, NativeCustomer>(new CustomerProfile())
             };
 
             // Use the minimum configuration

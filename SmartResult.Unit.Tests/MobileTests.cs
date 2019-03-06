@@ -11,6 +11,7 @@ using SmartResult.Unit.Tests.Models;
 using System.Collections.Generic;
 using Xunit;
 
+[assembly: CollectionBehavior(DisableTestParallelization = true)]
 namespace SmartResult.Unit.Tests
 {
     public class MobileTests
@@ -18,17 +19,16 @@ namespace SmartResult.Unit.Tests
         private readonly IRepository _repository;
         public MobileTests()
         {
+            AspNet.Core.SmartResult.SmartResult.Reset();
             _repository = new Repository();
         }
 
         [Fact]
         public void Should_Return_Default_Result_When_Mobile_Not_Defined()
         {
-            List<SmartResultProfile> profiles = new List<SmartResultProfile>
+            List<ISmartResultProfile> profiles = new List<ISmartResultProfile>
             {
-                new SmartResultProfile(new CustomerTestProfile(),
-                    typeof(Customer),
-                    native:typeof(NativeCustomer))
+                new SmartResultProfile<Customer, NativeCustomer>(new CustomerTestProfile(), Client.Native)
             };
 
             AspNet.Core.SmartResult.SmartResult.Configure(
@@ -77,16 +77,13 @@ namespace SmartResult.Unit.Tests
         [Fact]
         public void Should_Return_Mobile_Result()
         {
-            List<SmartResultProfile> profiles = new List<SmartResultProfile>
+            List<ISmartResultProfile> profiles = new List<ISmartResultProfile>
             {
-                new SmartResultProfile(new CustomerTestProfile(),
-                    typeof(Customer),
-                    typeof(MobileCustomer),
-                    typeof(NativeCustomer))
+                new SmartResultProfile<Customer, MobileCustomer, NativeCustomer>(new CustomerTestProfile())
             };
 
             AspNet.Core.SmartResult.SmartResult.Configure(
-                new AspNet.Core.SmartResult.SmartResultConfiguration(
+                new SmartResultConfiguration(
                     profiles
                 )
             );

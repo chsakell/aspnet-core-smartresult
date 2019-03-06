@@ -4,7 +4,9 @@ using Microsoft.AspNetCore.Mvc.Filters;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Resources;
 using System.Text;
+using SmartResult;
 
 namespace AspNet.Core.SmartResult
 {
@@ -14,8 +16,8 @@ namespace AspNet.Core.SmartResult
 
         #region Mapper
 
-        static MapperConfiguration mapperConfiguration;
-        static IMapper mapper;
+        static MapperConfiguration _mapperConfiguration;
+        static IMapper _mapper;
 
         #endregion
 
@@ -67,12 +69,12 @@ namespace AspNet.Core.SmartResult
 
                 if (_mobile != null && isMobileBrowser && resultType != mobileType)
                 {
-                    objectResult.Value = mapper.Map(objectResult.Value, _desktop, _mobile);
+                    objectResult.Value = _mapper.Map(objectResult.Value, _desktop, _mobile);
                     context.HttpContext.Response.Headers.Add("Result-Type", "Mobile");
                 }
                 else if (_native != null && isNativeDevice && resultType != nativeType)
                 {
-                    objectResult.Value = mapper.Map(objectResult.Value, _desktop, _native);
+                    objectResult.Value = _mapper.Map(objectResult.Value, _desktop, _native);
                     context.HttpContext.Response.Headers.Add("Result-Type", "Native");
                 }
                 else
@@ -89,17 +91,25 @@ namespace AspNet.Core.SmartResult
         {
             _configuration = configuration;
 
-            mapperConfiguration = new MapperConfiguration(cfg =>
+            _mapperConfiguration = new MapperConfiguration(cfg =>
             {
                 configuration.Profiles.ForEach(p =>
                 {
                     cfg.AddProfile(p.Profile);
                 });
             });
-            mapper = mapperConfiguration.CreateMapper();
+            _mapper = _mapperConfiguration.CreateMapper();
 
             isMobile = configuration.IsMobileBrowser();
             isNative = configuration.IsNativeDevice();
+        }
+
+        public static void Reset()
+        {
+            _configuration = null;
+            _mapper = null;
+            isMobile = null;
+            isNative = null;
         }
 
         #endregion  
@@ -146,35 +156,67 @@ namespace AspNet.Core.SmartResult
 
         private bool CanProcess(Type type)
         {
-            var baseType = GetType(type);
+            var baseType = GetType(type);           
 
-            var config = _configuration.Profiles.FirstOrDefault(p => p.Desktop == baseType);
+            var config = GetProfile(baseType);
 
             if (config == null)
                 return false;
 
-            var canProcess = config.Desktop != null && (config.Mobile != null || config.Native != null) && mapper != null;
+            var mobileType = GetClientType(config, Client.Mobile);
+            var nativeType = GetClientType(config, Client.Native);
+
+            var canProcess = (mobileType != null || nativeType != null) && _mapper != null;
 
             if (canProcess)
             {
                 _desktop = type;
 
-                if (config.Mobile != null)
+                if (mobileType != null)
                 {
-                    _mobile = CreateType(type, config.Mobile);
+                    _mobile = CreateType(type, mobileType);
                 }
 
-                if (config.Native != null)
+                if (nativeType != null)
                 {
-                    _native = CreateType(type, config.Native);
+                    _native = CreateType(type, nativeType);
                 }
             }
 
-            return canProcess;
+            //return canProcess;
+            return true;
         }
+
+        private ISmartResultProfile GetProfile(Type desktopType)
+        {
+            ISmartResultProfile profile = null;
+
+            foreach (var smartProfile in _configuration.Profiles)
+            {
+                var baseType = smartProfile.GetType().GetProperty("Desktop")
+                    .GetValue(smartProfile, null);
+
+                if (baseType != null && (Type)baseType == desktopType)
+                {
+                    profile = smartProfile;
+                    break;
+                }
+            }
+
+            return profile;
+        }
+
+        private Type GetClientType(ISmartResultProfile profile, Client type)
+        {
+            var mobileType = (Type)profile.GetType().GetProperty(type.ToString())
+                .GetValue(profile, null);
+
+            return mobileType;
+        }
+
         public void OnResultExecuted(ResultExecutedContext context)
         {
-
+            
         }
     }
 }

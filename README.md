@@ -50,12 +50,15 @@ public IActionResult Get()
     return repository.GetCustomers();
 }
 
-List<SmartResultProfile> profiles = new List<SmartResultProfile>
+ ```
+
+The configuration:
+
+```csharp
+
+List<ISmartResultProfile> profiles = new List<ISmartResultProfile>
 {
-    new SmartResultProfile(new CustomerProfile(), 
-        desktop: typeof(Customer), 
-        mobile: typeof(MobileCustomer), 
-        native: typeof(NativeCustomer))
+    new SmartResultProfile<Customer, MobileCustomer, NativeCustomer>(new CustomerProfile())
 };
 
 // Use the minimum configuration
@@ -65,7 +68,7 @@ SmartResult.Configure(
     )
 );
 
- ```
+```
 
 Works with ActionResults and base types as well
 
@@ -81,16 +84,13 @@ public Customer Get(int id)
 
 ```
 
-The configuration is an `AutoMapper` profile along with the mappings per type and device. For example:
+The configuration is a generic class that accepts the types of classes for Desktop, Mobile and/or Native plus an `AutoMapper` **profile**. For example:
 
  ```csharp
 
-List<SmartResultProfile> profiles = new List<SmartResultProfile>
+List<ISmartResultProfile> profiles = new List<ISmartResultProfile>
 {
-    new SmartResultProfile(new CustomerProfile(), 
-        typeof(Customer), 
-        typeof(MobileCustomer), 
-        typeof(NativeCustomer))
+    new SmartResultProfile<Customer, MobileCustomer, NativeCustomer>(new CustomerProfile())
 };
 
 // Use the minimum configuration
@@ -105,6 +105,24 @@ SmartResult.Configure(
 1. `Customer` for desktop browsers
 2. `MobileCustomer` for mobile browsers
 3. `NativeCustomer` for native apps
+
+The Desktop Generic type is mandatory but you can choose to support only Mobile or Native clients as follow:
+
+```csharp
+
+// Desktop & Mobile Only
+List<ISmartResultProfile> profiles = new List<ISmartResultProfile>
+{
+    new SmartResultProfile<Customer, MobileCustomer>(new CustomerTestProfile(), Client.Mobile)
+};
+
+// Desktop & Native Only
+List<ISmartResultProfile> profiles = new List<ISmartResultProfile>
+{
+    new SmartResultProfile<Customer, NativeCustomer>(new CustomerTestProfile(), Client.Native)
+};
+
+```
 
 ### Installation
 
@@ -130,12 +148,9 @@ public void Configure(IApplicationBuilder app, IHostingEnvironment env)
     }
 
     // Add a list of AutoMapper profiles to be used by SmartResult
-    List<SmartResultProfile> profiles = new List<SmartResultProfile>
+    List<ISmartResultProfile> profiles = new List<ISmartResultProfile>
     {
-        new SmartResultProfile(new CustomerProfile(), 
-            typeof(Customer), 
-            typeof(MobileCustomer), 
-            typeof(NativeCustomer))
+        new SmartResultProfile<Customer, MobileCustomer, NativeCustomer>(new CustomerProfile())
     };
 
     // Use the minimum configuration
@@ -149,7 +164,7 @@ public void Configure(IApplicationBuilder app, IHostingEnvironment env)
 
 ```
 
-The above minumum configuration will use a default implementation for detecting mobile devices. `CustomerProfile` is an AutoMapper profile *(just for this demonstration)* and could look like this:
+The above configuration will use a default implementation for detecting mobile devices. `CustomerProfile` is an AutoMapper profile *(just for this demonstration)* and could look like this:
 
 ```csharp
 
@@ -187,12 +202,9 @@ public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         app.UseDeveloperExceptionPage();
     }
 
-    List<SmartResultProfile> profiles = new List<SmartResultProfile>
+    List<ISmartResultProfile> profiles = new List<ISmartResultProfile>
     {
-        new SmartResultProfile(new CustomerProfile(), 
-            typeof(Customer), 
-            typeof(MobileCustomer), 
-            typeof(NativeCustomer))
+        new SmartResultProfile<Customer, MobileCustomer, NativeCustomer>(new CustomerProfile())
     };
 
     // Use the minimum configuration
