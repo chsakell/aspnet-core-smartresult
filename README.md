@@ -38,7 +38,7 @@ public class NativeCustomer
 
 ```
 
-The snippet below will return type of `IEnumerable<Customer>` for *(desktop)* and type of `IEnumerable<MobileCustomer>` for mobile browsers based on configuration.
+The action below will return type of `IEnumerable<Customer>` for desktop, type of `IEnumerable<MobileCustomer>` for mobile browsers and `IEnumerable<NativeCustomer>` based on configuration that follows.
 
 ```csharp
 
@@ -49,6 +49,21 @@ public IActionResult Get()
 {
     return repository.GetCustomers();
 }
+
+List<SmartResultProfile> profiles = new List<SmartResultProfile>
+{
+    new SmartResultProfile(new CustomerProfile(), 
+        desktop: typeof(Customer), 
+        mobile: typeof(MobileCustomer), 
+        native: typeof(NativeCustomer))
+};
+
+// Use the minimum configuration
+SmartResult.Configure(
+    new SmartResultConfiguration(
+        profiles
+    )
+);
 
  ```
 
