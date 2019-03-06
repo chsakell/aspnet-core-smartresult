@@ -45,9 +45,9 @@ namespace AspNet.Core.SmartResult.Demo
             List<SmartResultProfile> profiles = new List<SmartResultProfile>
             {
                 new SmartResultProfile(new CustomerProfile(), 
-                    typeof(Customer), 
-                    typeof(MobileCustomer), 
-                    typeof(NativeCustomer))
+                    desktop: typeof(Customer), 
+                    mobile: typeof(MobileCustomer), 
+                    native: typeof(NativeCustomer))
             };
 
             // Use the minimum configuration

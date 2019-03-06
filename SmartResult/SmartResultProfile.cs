@@ -13,7 +13,8 @@ namespace SmartResult
 
         public Type Native { get; }
 
-        public SmartResultProfile(Profile profile, Type desktop, Type mobile = null, Type native = null)
+        public SmartResultProfile(Profile profile, 
+            Type desktop, Type mobile = null, Type native = null)
         {
             Profile = profile;
             Desktop = desktop;
