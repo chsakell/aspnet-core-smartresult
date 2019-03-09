@@ -10,7 +10,7 @@ Result filter for ASP.NET Core MVC Controllers that can produce multiple types o
 
 ### Description
 
- Most of the times mobile devices/browsers consume and render only partial data in contrast with those rendered by desktop browsers. This usually results to create different MVC actions or even applications that serve different content to different types of clients in order to reduce unused data tranfered over the wire. `SmartResult` filter can help you solve this problem by transforming the type of the action's result based on the device.
+Most of the times mobile devices/browsers consume and render only partial data in contrast with those rendered by desktop browsers. This usually results to create different MVC actions or even applications that serve different content to different types of clients in order to reduce unused data tranfered over the wire. `SmartResult` filter can help you solve this problem by transforming the type of the action's result based on the device.
 
  `SmartResult` implements `IResultFilter` and `Attribute` so it can be placed as a filter attribute above ASP.NET Core MVC Controller actions. You declare the default returned type of the result *(which is for desktop)*, the returned type for mobile browsers and native apps as well. The filter upon `OnResultExecuting` event detects the type of the client and uses `AutoMapper` to transform the result if required.
 
@@ -123,6 +123,10 @@ List<ISmartResultProfile> profiles = new List<ISmartResultProfile>
 };
 
 ```
+
+### How it works
+When you apply the `SmartResult` filter on an Action, the filter will search for an `ISmartResultProfile` profile having as it's Desktop class type the base type of your Action's result *(e.g. if the action's result type is `IEnumerable<Customer>` or just `Customer` the filter will search a profile with desktop type of `Customer`)*. If it founds one then it will detect if the request comes from mobile or native device and manipulate the result respectively if needed.
+
 
 ### Installation
 
